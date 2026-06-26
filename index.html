@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+    padding:20px;
+}
+
+/* Heading */
+h1{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(35px,8vw,65px);
+    color:white;
+    margin-bottom:30px;
+}
+h2{
+    font-family: 'Dancing Script',cursive;
+    margin: bottom -70px;
+    
+}
+h3{
+   font-family:'Dancing Script',cursive;
+    font-size:clamp(2x,8vw,65px);
+    margin-bottom:-10px; 
+}
+/*typing text*/
+#typing{
+    font-size:clamp(18px,4.5vw,28px);
+    margin-bottom:30px;
+    min-height:40px;
+    padding:0 10px;
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Carousel */
+.carousel{
+    width:100%;
+    overflow-x:auto;
+    display:flex;
+    gap:20px;
+    padding:20px;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+}
+
+/* Hide scrollbar */
+.carousel::-webkit-scrollbar{
+    display:none;
+}
+
+/* Cards */
+.card{
+    flex:0 0 75%;
+    max-width:300px;
+    scroll-snap-align:center;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    transition:0.3s ease;
+}
+
+/* Hover effect */
+.card:hover{
+    transform:scale(1.03);
+}
+
+/* Images */
+.card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    display:block;
+}
+
+/* Caption */
+.caption{
+    padding:15px;
+    text-align:center;
+    color:#444;
+    font-size:16px;
+    font-weight:500;
+}
+
+/* Mobile */
+@media(max-width:480px){
+
+    .card{
+        flex:0 0 85%;
+    }
+
+    .card img{
+        height:300px;
+    }
+
+}
+.player{
+    background:#f1f1f1;
+    padding:-30px;
+    border-radius: 50px;
+    width:350px;
+    box-shadow:0 5px 20px rgba(255,255,255,0.1);
+}
+
+audio{
+    width:100%;
+    outline:none;
+}
+.cake-btn{
+    padding:14px 30px;
+    font-size:clamp(16px,4vw,22px);
+    font-weight:bold;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#19b9e0,#ffb199);
+    color:rgb(14, 13, 13);
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
+    width:fit-content;
+    max-width:90%;
+    text-align:center;
+
+    margin:30px auto 50px;
+    display:block;
+}
+
+.cake-btn:hover{
+    transform:scale(2);
+}
+
+
+</style>
+</head>
+
+<body> 
+    <h1> </h1>
+    <h1> </h1>
+<h2> Wish you a very</h2>
+<h1>Happy Birthday</h1>
+<br>
+<h3>Play Music</h3>
+<br>
+<div class="player">
+    <audio controls>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+</div>
+<br>
+<h3>Scroll→</h3>
+<div class="carousel">
+
+    <div class="card">
+        <img src="img4.jpg">
+        <div class="caption"> 💕</div>
+    </div>
+
+    <div class="card">
+        <img src="img3.jpg">
+        <div class="caption">😊</div>
+    </div>
+
+    <div class="card">
+        <img src="img12.jpeg">
+        <div class="caption">✨</div>
+    </div>
+
+    <div class="card">
+        <img src="img5.jpg">
+        <div class="caption">💫</div>
+    </div>
+    <div class="card">
+        <img src="img6.jpg">
+        <div class="caption">🥰</div>
+    </div>
+    <div class="card">
+        <img src="img7.jpg">
+        <div class="caption">💗</div>
+    </div>
+    <div class="card">
+        <img src="img8.jpg">
+        <div class="caption">💞</div>
+    </div>
+    <div class="card">
+        <img src="img9.jpg">
+        <div class="caption">💘</div>
+    </div>
+    <div class="card">
+        <img src="img10.jpg">
+        <div class="caption">🩵</div>
+    </div>
+    <div class="card">
+        <img src="img11.jpg">
+        <div class="caption">💝</div>
+    </div>
+    <div class="card">
+        <img src="img2.jpeg">
+        <div class="caption">❣️</div>
+    </div>
+
+</div>
+<button class="cake-btn" onclick="goToCakePage()">
+    Let's Cut Cake 🎂 
+</button>
+
+
+<script>
+    //music
+    function playMusic() {
+    document.getElementById("music").play();
+}
+
+// Typing Effect
+const text = "Wish you a very";
+let i = 0;
+
+function typeEffect(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect,50);
+    }
+}
+typeEffect();
+//button
+function goToCakePage(){
+    window.location.href = "cake.html";
+}
+</script>
+</body>
+</html>

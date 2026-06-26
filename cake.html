@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cut The Cake 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+     min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Cake Container */
+.cake-container{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin-top:40px;
+    margin-bottom:40px;
+    flex-shrink:0;
+}
+
+/* Cake */
+.cake{
+    position:absolute;
+    bottom:0;
+    width:260px;
+    height:180px;
+    background:#ffccd5;
+    border-radius:20px 20px 10px 10px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    transition:1s ease;
+}
+
+/* Cream layers */
+.cake::before{
+    content:"";
+    position:absolute;
+    top:35px;
+    width:100%;
+    height:20px;
+    background:white;
+}
+
+.cake::after{
+    content:"";
+    position:absolute;
+    top:80px;
+    width:100%;
+    height:20px;
+    background:white;
+}
+
+/* Candles */
+.candles{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:20px;
+}
+
+.candle{
+    width:12px;
+    height:50px;
+    background:white;
+    border-radius:5px;
+    position:relative;
+}
+
+.flame{
+    width:14px;
+    height:14px;
+    background:gold;
+    border-radius:50%;
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    animation:flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker{
+    from{
+        transform:translateX(-50%) scale(1);
+    }
+    to{
+        transform:translateX(-50%) scale(1.2);
+    }
+}
+
+/* Cut effect */
+/* Left Half */
+.left-half{
+    clip-path:polygon(0 0,50% 0,50% 100%,0 100%);
+    left:1px;   /* overlap fix */
+}
+
+/* Right Half */
+.right-half{
+    clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%);
+    right:1px;  /* overlap fix */
+}
+
+/* Button */
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    font-size:20px;
+    font-weight:bold;
+    background:white;
+    color:#ff4e8a;
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* Responsive */
+@media(max-width:480px){
+
+    .cake-container{
+        transform:scale(0.9);
+    }
+
+    button{
+        font-size:18px;
+        padding:14px 28px;
+        
+    }
+}
+/* Birthday Card */
+.birthday-card{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(0.7);
+
+    width:320px;
+    max-width:90vw;
+
+    background:white;
+    padding:25px;
+    border-radius:25px;
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+
+    opacity:0;
+    transition:0.8s ease;
+
+    z-index:10;
+    pointer-events:none;
+}
+
+.birthday-card.show{
+    opacity:1;
+    transform:translate(-50%, -50%) scale(1);
+    pointer-events:auto;
+}
+.birthday-card h2{
+    color:#ff4e8a;
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+.birthday-card p{
+    color:#555;
+    font-size:16px;
+    line-height:1.7;
+}
+/* Gift Button */
+.gift-btn{
+    margin-top:20px;
+    padding:14px 30px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff4e8a,#ff7eb3);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.gift-btn:hover{
+    transform:scale(1.06);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cake-container">
+
+    <!-- Left Part -->
+    <div class="cake left-half" id="leftCake"></div>
+
+    <!-- Right Part -->
+    <div class="cake right-half" id="rightCake"></div>
+
+    <!-- Candles -->
+    <div class="candles">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <!-- Birthday Card -->
+    <div class="birthday-card" id="birthdayCard">
+           
+        <h3>Happy Birthday</h3>
+        <h2>Shilpa</h2>
+
+        <p>
+            Wishing you endless happiness, beautiful smiles,
+            and all the love in the world ✨<br><br>
+
+            May your day be as special and wonderful as you are 💖
+        </p>
+
+        <button class="gift-btn" onclick="openGiftPage()">
+            A small video note for you
+        </button>
+
+    </div>
+
+</div>
+
+<button id="blowBtn" onclick="blowCandles()">
+    🕯️ Blow The Candles
+</button>
+
+<br><br>
+
+<button id="cutBtn" onclick="cutCake()" disabled>
+    🎂 Cut The Cake
+</button>
+
+
+
+<script>
+
+let cut = false;
+
+// Blow Candles
+function blowCandles(){
+
+    const flames = document.querySelectorAll(".flame");
+
+    flames.forEach(flame => {
+        flame.style.opacity = "0";
+        flame.style.transform = "translateX(-50%) scale(0)";
+    });
+
+    // Enable cake cutting button
+    document.getElementById("cutBtn").disabled = false;
+
+    // Change button style
+    document.getElementById("cutBtn").style.opacity = "1";
+    document.getElementById("cutBtn").style.cursor = "pointer";
+
+    // Disable blow button
+    document.getElementById("blowBtn").disabled = true;
+    document.getElementById("blowBtn").innerHTML = "✨ Candles Blown";
+}
+
+// Cut Cake
+function cutCake(){
+
+    if(cut) return;
+
+    cut = true;
+
+    // Cake cutting animation
+    document.getElementById("leftCake").style.transform =
+        "translateX(-60px) rotate(-10deg)";
+
+    document.getElementById("rightCake").style.transform =
+        "translateX(60px) rotate(10deg)";
+
+    // Delay before showing birthday card
+    setTimeout(() => {
+
+        document.getElementById("birthdayCard")
+        .classList.add("show");
+
+    }, 1500); // 3 seconds delay
+}
+function openGiftPage(){
+    window.location.href = "gifts.html";
+}
+</script>
+
+</body>
+</html>

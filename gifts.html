@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video 🎥</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Gift Box */
+.gift-box {
+    font-size: 15vw;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gift-box:hover {
+    transform: scale(1.1);
+}
+
+.gift-box p {
+    font-size: 4vw;
+    margin-top: 10px;
+}
+
+/* Video Container */
+#videoContainer{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    max-width:700px;
+    text-align:center;
+}
+
+.show {
+    display: flex !important;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Video styling */
+video{
+    width:min(90vw,400px);
+    border-radius:20px;
+    margin-top:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Heading */
+h2{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(24px,4vw,48px);
+    margin-bottom:20px;
+    color:#222;
+    line-height:1.3;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Gift Box -->
+<div id="gift" class="gift-box" onclick="openGift()">
+    🎥
+    <p>Tap to open video </p>
+</div>
+
+<!-- Video Section -->
+<div id="videoContainer">
+    <h2>Here is a small video which describes how I imagine you in my mind 💖</h2>
+    <video controls>
+        <source src="birthday.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<script>
+function openGift() {
+    document.getElementById("gift").style.display = "none";
+    document.getElementById("videoContainer").classList.add("show");
+}
+</script>
+
+</body>
+</html>
